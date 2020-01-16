@@ -235,7 +235,8 @@ void *macho_load_bytes (macho_t *macho, size_t size, uint32_t offset)
 
 void macho_free (macho_t *macho)
 {
-    // NULL and free() everything in the struct.
+    macho = NULL;
+    free (macho);
 }
 
 
@@ -418,7 +419,8 @@ fat_header_info_t *mach_universal_load (file_t *file)
         exit (0);
     }
 
-    printf ("[*] %s: Mach-O Universal Binary. Found %d architectures.\n", file->path, fat_header->nfat_arch);
+    if (fat_header->nfat_arch > 1) 
+        printf ("[*] %s: Mach-O Universal Binary. Found %d architectures.\n", file->path, fat_header->nfat_arch);
 
     // Arch list
     HSList *archs = NULL;
