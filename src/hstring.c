@@ -72,13 +72,13 @@ HString *h_string_insert_len (HString *string, size_t pos, const char *val, size
 
     if (len == 0) return string;
 
-    if (len < 0) {
+    if ((int)len < 0) {
         len = strlen (val);
     }
 
     len_unsigned = len;
 
-    if (pos < 0) {
+    if ((int)pos < 0) {
         pos_unsigned = string->len;
     } else {
         pos_unsigned = string->len;
